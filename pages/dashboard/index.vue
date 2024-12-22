@@ -1,6 +1,6 @@
 <template>
     <div>
-     login
+          dashboard
     </div>
   </template>
   
