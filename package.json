@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@nuxtjs/composition-api": "^0.34.0",
+    "highcharts": "^12.1.2",
     "nuxt": "^3.14.1592",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

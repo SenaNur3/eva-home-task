@@ -35,25 +35,33 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
+const store = useStore();
 const router = useRouter();
 
 const runtimeConfig = useRuntimeConfig();
 const apiBase = runtimeConfig.public.apiBase;
 
-const email = ref("");
-const password = ref("");
-const accessToken = ref("");
+const email = ref(""); // Local email
+const password = ref(""); // Local password
+const accessToken = ref(""); // Access token
+const error = ref(""); // Error state
 
 
-const response = ref(null);
-const error = ref("");
 
-
+// Login handler
 const handleLogin = async () => {
     try {
+        console.log('burda1')
+        // Update Vuex store with email and password
+        store.dispatch("saveCredentials", {
+            email: email.value,
+            password: password.value,
+        });
+        console.log('burda')
         const result = await $fetch(`${apiBase}/oauth/token`, {
             method: "POST",
             headers: {
@@ -69,15 +77,15 @@ const handleLogin = async () => {
                 RedirectUri: "https://api.eva.guru",
             },
         });
-
+        console.log('burda2')
         if (result?.ApiStatusCode === 200 && result?.Data?.AccessToken) {
             accessToken.value = result.Data.AccessToken;
             localStorage.setItem("accessToken", accessToken.value);
+            console.log('burda3')
             await router.push("/dashboard");
         } else {
             error.value = result?.ApiStatusMessage || "Login failed. Please try again.";
         }
-
     } catch (err) {
         error.value = "Login failed. Please check your credentials.";
     }
