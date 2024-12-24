@@ -1,10 +1,13 @@
 <template>
-      <div>
-            <h1 class="text-center text-2xl font-bold mb-4">Sales Dashboard</h1>
-            <Highcharts />
+      <div class="flex justify-center ">
+            <div class="container flex  items-center flex-col">
+                  <Header />
+                  <Highcharts />
+            </div>
       </div>
 </template>
 
 <script setup>
+import Header from "~/components/Header.vue";
 import Highcharts from "~/components/Highcharts.vue";
 </script>
