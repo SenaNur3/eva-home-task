@@ -111,8 +111,6 @@ const userEmail = computed(() => store.getters.getEmail);
 const paginatedData = computed(() => {
     const start = (currentPage.value - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-    console.log('filteredData.value', filteredData.value)
-
     return filteredData.value.slice(start, end);
 });
 const maxPage = computed(() => Math.ceil(filteredData.value.length / rowsPerPage));
@@ -128,7 +126,7 @@ const filteredData = computed(() => {
 const formatDateWithDay = (dateString) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('en-US', {
-        weekday: 'long', // Gün adı
+        weekday: 'long',
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -249,12 +247,10 @@ const fetchRefundRates = async (skuList) => {
 };
 
 const fetchTableData = async () => {
-    console.log("selectedColumns.value", selectedColumns.value);
     if (!selectedColumns.value.length) return;
     const isDaysCompare = selectedColumns.value.length === 2 ? 1 : 0;
-    console.log("selectedColumns.value1", selectedColumns.value);
     const [salesDate, salesDate2] = selectedColumns.value;
-    console.log("selectedColumns.value2", salesDate);
+
     isLoadingTable.value = true;
     try {
         const token = localStorage.getItem("accessToken");

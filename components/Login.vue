@@ -53,8 +53,6 @@ const error = ref("");
 
 const handleLogin = async () => {
     try {
-        console.log('burda1')
-        // Update Vuex store with email and password
         store.dispatch("saveCredentials", {
             email: email.value,
             password: password.value,
